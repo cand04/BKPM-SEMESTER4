@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ManagementUserController;
 
 Route::get('/', function () {
     return view('hello_world');
@@ -10,7 +11,7 @@ Route::get('/', function () {
 Route::get('/foo', function () {
     return 'Hello, world!';
 });
-
+ 
 Route::get('/foo/{id}', function ($id) {
     return 'User = ' . $id;
 });
@@ -21,8 +22,8 @@ Route::redirect('/coba', '/sini');
 
 Route::get('/profile', function () {
     return view('profile', [
-        'nama'  => 'Rafli Ulya Armadhan',
-        'nim'   => 'E41231493',
+        'nama'  => 'Candra Puji Utama',
+        'nim'   => 'E41231578',
         'prodi' => 'Teknik Informatika'
     ]);
 });
@@ -55,9 +56,6 @@ Route::get('/user5/profile', function () {
 
 Route::get('/user6/profile', [UserController::class, 'show'])->name('profile.user6');
 
-//
-//
-//
-//
-//
-//
+//acara 5
+Route::get('user', 'ManagementUserController@index');
+Route::resource('user', ManagementUserController::class);
