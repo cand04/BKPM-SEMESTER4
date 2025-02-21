@@ -1,24 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ManagementUserController;
+use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('hello_world');
-});
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
+// Route untuk home page
+// Route::get('/', function () {
+//     return view('hello_world'); // Atau view lainnya
+// });
+
+// Route lainnya
 Route::get('/foo', function () {
     return 'Hello, world!';
 });
- 
+
 Route::get('/foo/{id}', function ($id) {
     return 'User = ' . $id;
 });
-
-Route::get('/user', [UserController::class, 'index']);
-
-Route::redirect('/coba', '/sini');
 
 Route::get('/profile', function () {
     return view('profile', [
@@ -48,14 +57,16 @@ Route::get('/search/{query}', function ($query) {
     return "Search result for: $query";
 })->where('query', '.*');
 
+// Redirect Route
+Route::redirect('/coba', '/sini');
+
+// Route untuk profile
 Route::get('/user/profile', [UserController::class, 'show'])->name('profile.user');
 
-Route::get('/user5/profile', function () {
-    return "Ini adalah halaman user 5.";
-})->name('profile.user5');
+// Route untuk user 5
 
-Route::get('/user6/profile', [UserController::class, 'show'])->name('profile.user6');
-
-//acara 5
-Route::get('user', 'ManagementUserController@index');
-Route::resource('user', ManagementUserController::class);
+//acara7
+route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
+{
+    route::resource('home', 'HomeController');
+});
