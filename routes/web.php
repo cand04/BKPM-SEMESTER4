@@ -81,6 +81,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/home', [ManagementUserController::class, 'index']);
 
 //acara7
 // route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
