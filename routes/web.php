@@ -84,7 +84,7 @@ Route::get('/home', function () {
 Route::get('/home', [ManagementUserController::class, 'index']);
 
 //acara7
-// route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
-// {
-//     route::resource('home', 'HomeController');
-// });
+route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
+{
+    route::resource('home', 'HomeController');
+});
