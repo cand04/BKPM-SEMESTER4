@@ -1,4 +1,5 @@
-    @extends('frontend/layouts.template')
+
+@extends('frontend/layouts.template')
 
     @section('content')
     
