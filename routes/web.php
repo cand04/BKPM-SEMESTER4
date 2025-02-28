@@ -89,5 +89,14 @@ use App\Http\Controllers\Backend\DashboardController;
 //     route::resource('home', 'HomeController');
 // });
 
-//acara 8 (eror)
-Route::resource('dashboard', DashboardController::class);
+// //acara 8 (eror)
+// Route::resource('dashboard', DashboardController::class);
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//acara 11
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
