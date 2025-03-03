@@ -4,7 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\backend\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,14 +89,14 @@ use App\Http\Controllers\Backend\DashboardController;
 //     route::resource('home', 'HomeController');
 // });
 
-// //acara 8 (eror)
-// Route::resource('dashboard', DashboardController::class);
+//Acara 8
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//acara 11
-Auth::routes();
+// //acara 11
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
