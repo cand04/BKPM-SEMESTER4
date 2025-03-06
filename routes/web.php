@@ -103,7 +103,14 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//acara 13
-Route::resource('dashboard', DashboardController::class);
-Route::resource('pendidikan', PendidikanController::class);
-Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+// //acara 13
+// Route::resource('dashboard', DashboardController::class);
+// Route::resource('pendidikan', PendidikanController::class);
+// Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+
+//acara 15
+Route::group(['namespace'=>'Backend'], function()
+{
+    Route::resource('dashboard', 'DashboardController');
+    Route::resource('pendidikan', 'PendidikanController');
+});
