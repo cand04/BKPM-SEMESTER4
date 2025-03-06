@@ -5,6 +5,8 @@ use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\Backend\PengalamanKerjaController;
+use App\Http\Controllers\PendidikanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,3 +102,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//acara 13
+Route::resource('dashboard', DashboardController::class);
+Route::resource('pendidikan', PendidikanController::class);
+Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
