@@ -14,61 +14,77 @@
             </div>
         </div>
 
+        <!-- Menampilkan pesan error -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Form untuk menambahkan atau mengedit pengalaman kerja -->
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Menambahkan Pengalaman Kerja
+                        @isset($pengalaman_kerja)
+                            Mengedit Pengalaman Kerja
+                        @else
+                            Menambahkan Pengalaman Kerja
+                        @endisset
                     </header>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('pengalaman_kerja.store') }}">
+                        <form class="form-validate form-horizontal" id="pengalaman_kerja_form" method="POST" 
+                              action="{{ isset($pengalaman_kerja) ? route('pengalaman_kerja.update', $pengalaman_kerja->id) : route('pengalaman_kerja.store') }}">
                             @csrf
+                            @isset($pengalaman_kerja)
+                                @method('PUT')
+                            @endisset
 
                             <div class="form-group">
-                                <label for="nama" class="control-label col-lg-2">Nama Perusahaan</label>
+                                <label for="nama" class="control-label col-lg-2">Nama Perusahaan <span class="required">*</span></label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="nama" name="nama" class="form-control" required>
+                                    <input class="form-control" id="nama" name="nama" type="text" 
+                                           value="{{ old('nama', isset($pengalaman_kerja) ? $pengalaman_kerja->nama : '') }}" 
+                                           required minlength="3" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="jabatan" class="control-label col-lg-2">Jabatan</label>
+                                <label for="jabatan" class="control-label col-lg-2">Jabatan <span class="required">*</span></label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="jabatan" name="jabatan" class="form-control" required>
+                                    <input class="form-control" id="jabatan" name="jabatan" type="text" 
+                                           value="{{ old('jabatan', isset($pengalaman_kerja) ? $pengalaman_kerja->jabatan : '') }}" 
+                                           required minlength="2" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="tahun_masuk" class="control-label col-lg-2">Tahun Masuk</label>
+                                <label for="tahun_masuk" class="control-label col-lg-2">Tahun Masuk <span class="required">*</span></label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="tahun_masuk" name="tahun_masuk" class="form-control" required>
+                                    <input class="form-control" id="tahun_masuk" name="tahun_masuk" type="text" 
+                                           value="{{ old('tahun_masuk', isset($pengalaman_kerja) ? $pengalaman_kerja->tahun_masuk : '') }}" 
+                                           required minlength="4" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="tahun_keluar" class="control-label col-lg-2">Tahun Keluar</label>
+                                <label for="tahun_keluar" class="control-label col-lg-2">Tahun Keluar <span class="required">*</span></label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="tahun_keluar" name="tahun_keluar" class="form-control" required>
+                                    <input class="form-control" id="tahun_keluar" name="tahun_keluar" type="text" 
+                                           value="{{ old('tahun_keluar', isset($pengalaman_kerja) ? $pengalaman_kerja->tahun_keluar : '') }}" 
+                                           required minlength="4" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                    <a href="{{ route('pengalaman_kerja.index') }}">
-                                        <button type="button" class="btn btn-default">Batal</button>
-                                    </a>
+                                    <button class="btn btn-primary" type="submit">Simpan</button>
+                                    <a href="{{ route('pengalaman_kerja.index') }}" class="btn btn-default">Batal</a>
                                 </div>
                             </div>
                         </form>

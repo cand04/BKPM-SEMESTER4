@@ -10,7 +10,7 @@ class PengalamanKerjaController extends Controller
 {
     public function index()
     {
-        // Ambil semua data pengalaman kerja
+        // Ambil semua data pengalaman kerja menggunakan Eloquent ORM
         $pengalaman_kerja = PengalamanKerja::all();  
         return view('backend.pengalaman_kerja.index', compact('pengalaman_kerja'));
     }
@@ -22,7 +22,7 @@ class PengalamanKerjaController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
+        // Validasi input menggunakan Laravel's built-in validation
         $request->validate([
             'nama' => 'required|min:3',
             'jabatan' => 'required|min:2',
@@ -30,7 +30,7 @@ class PengalamanKerjaController extends Controller
             'tahun_keluar' => 'required|digits:4',
         ]);
 
-        // Simpan data pengalaman kerja
+        // Simpan data pengalaman kerja menggunakan Eloquent ORM
         PengalamanKerja::create([
             'nama' => $request->nama,
             'jabatan' => $request->jabatan,
@@ -43,9 +43,9 @@ class PengalamanKerjaController extends Controller
 
     public function edit($id)
     {
-        // Ambil data pengalaman kerja untuk diubah
+        // Ambil data pengalaman kerja berdasarkan ID menggunakan Eloquent ORM
         $pengalaman_kerja = PengalamanKerja::find($id);
-        return view('backend.pengalaman_kerja.edit', compact('pengalaman_kerja'));
+        return view('backend.pengalaman_kerja.create', compact('pengalaman_kerja'));
     }
 
     public function update(Request $request, $id)
@@ -58,24 +58,26 @@ class PengalamanKerjaController extends Controller
             'tahun_keluar' => 'required|digits:4',
         ]);
 
-        // Update data pengalaman kerja
+        // Perbarui data pengalaman kerja berdasarkan ID menggunakan Eloquent ORM
         $pengalaman_kerja = PengalamanKerja::find($id);
         $pengalaman_kerja->update([
             'nama' => $request->nama,
             'jabatan' => $request->jabatan,
             'tahun_masuk' => $request->tahun_masuk,
-            'tahun_keluar' => $request->tahun_keluar,
+            'tahun_keluar' => $request->tahun_keluar
         ]);
 
-        return redirect()->route('pengalaman_kerja.index')->with('success', 'Data pengalaman kerja berhasil diupdate.');
+        return redirect()->route('pengalaman_kerja.index')
+            ->with('success', 'Pengalaman Kerja berhasil diperbaharui.');
     }
 
     public function destroy($id)
     {
-        // Hapus data pengalaman kerja
+        // Hapus data pengalaman kerja menggunakan Eloquent ORM
         $pengalaman_kerja = PengalamanKerja::find($id);
         $pengalaman_kerja->delete();
 
-        return redirect()->route('pengalaman_kerja.index')->with('success', 'Data pengalaman kerja berhasil dihapus.');
+        return redirect()->route('pengalaman_kerja.index')
+            ->with('success', 'Data Pengalaman Kerja berhasil dihapus');
     }
 }
