@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
 use App\Http\Controllers\Backend\PendidikanController;
+use App\Http\Controllers\PegawaiController;
 
 
 /*
@@ -92,8 +94,8 @@ use App\Http\Controllers\Backend\PendidikanController;
 //     route::resource('home', 'HomeController');
 // });
 
-//Acara 8
-Route::get('/dashboard', [DashboardController::class, 'index']);
+// //Acara 8
+// Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Auth::routes();
 
@@ -104,11 +106,20 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// //acara 13
+// //acara 13 & 14
 // Route::resource('dashboard', DashboardController::class);
 // Route::resource('pendidikan', PendidikanController::class);
 // Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
 
-//acara 15
-Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
-Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
+// //acara 15 & 16
+// Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
+// Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
+
+//acara 17
+Route::get('/session/create', [SessionController::class, 'create']);
+Route::get('/session/show', [SessionController::class, 'show']);
+Route::get('/session/delete', [SessionController::class,'delete']);
+
+Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
+Route::get('/formulir', [PegawaiController::class, 'formulir']);
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
