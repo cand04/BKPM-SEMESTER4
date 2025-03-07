@@ -1,4 +1,20 @@
-<i class="icon_document_alt"></i> Riwayat Hidup
+@extends('backend.layouts.template')
+
+@section('content')
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">
+                    <i class="icon_document_alt"></i> Riwayat Hidup
+                </h3>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="{{ url('dashboard') }}">Home</a>
+                    </li>
+                    <li>
+                        <i class="icon_document_alt"></i> Riwayat Hidup
                     </li>
                     <li>
                         <i class="fa fa-files-o"></i> Pendidikan
@@ -12,7 +28,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Pendidikan
+                        {{ isset($pendidikan) ? 'Mengubah' : 'Menambahkan' }} Pendidikan
                     </header>
 
                     <div class="panel-body">
@@ -30,16 +46,18 @@
 
                         <!-- Form Input Pendidikan -->
                         <form class="form-validate form-horizontal" id="pendidikan_form" method="POST"
-                            action="{{ route('pendidikan.store') }}">
+                            action="{{ isset($pendidikan) ? route('pendidikan.update', $pendidikan->id) : route('pendidikan.store') }}">
                             @csrf
+                            @if(isset($pendidikan))
+                                @method('PUT')
+                            @endif
 
                             <div class="form-group">
                                 <label for="nama" class="control-label col-lg-2">
                                     Nama Sekolah <span class="required">*</span>
                                 </label>
                                 <div class="col-lg-10">
-                                    <input class="form-control" id="nama" name="nama" type="text"
-                                        minlength="5" required>
+                                    <input class="form-control" id="nama" name="nama" minlength="5" type="text" value="{{ old('nama', isset($pendidikan) ? $pendidikan->nama : '') }}" required/>
                                 </div>
                             </div>
 
@@ -49,12 +67,14 @@
                                 </label>
                                 <div class="col-lg-10">
                                     <select class="form-control" name="tingkatan" id="tingkatan" required>
-                                        <option value="1">TK</option>
-                                        <option value="2">SD</option>
-                                        <option value="3">SMP</option>
-                                        <option value="4">SMA/SPK</option>
-                                        <option value="5">D3</option>
-                                        <option value="6">D4/S1</option>
+                                        <option value="1" {{ (isset($pendidikan) && $pendidikan->tingkatan == 1) ? 'selected' : '' }}>TK</option>
+                                        <option value="2" {{ (isset($pendidikan) && $pendidikan->tingkatan == 2) ? 'selected' : '' }}>SD</option>
+                                        <option value="3" {{ (isset($pendidikan) && $pendidikan->tingkatan == 3) ? 'selected' : '' }}>SMP</option>
+                                        <option value="4" {{ (isset($pendidikan) && $pendidikan->tingkatan == 4) ? 'selected' : '' }}>SMA/SMK</option>
+                                        <option value="5" {{ (isset($pendidikan) && $pendidikan->tingkatan == 5) ? 'selected' : '' }}>D3</option>
+                                        <option value="6" {{ (isset($pendidikan) && $pendidikan->tingkatan == 6) ? 'selected' : '' }}>D4/S1</option>
+                                        <option value="7" {{ (isset($pendidikan) && $pendidikan->tingkatan == 7) ? 'selected' : '' }}>S2</option>
+                                        <option value="8" {{ (isset($pendidikan) && $pendidikan->tingkatan == 8) ? 'selected' : '' }}>S3</option>
                                     </select>
                                 </div>
                             </div>
@@ -64,8 +84,7 @@
                                     Tahun Masuk <span class="required">*</span>
                                 </label>
                                 <div class="col-lg-10">
-                                    <input id="tahun_masuk" name="tahun_masuk" class="form-control"
-                                        type="text" required>
+                                    <input id="tahun_masuk" type="text" name="tahun_masuk" class="form-control" value="{{ old('tahun_masuk', isset($pendidikan) ? $pendidikan->tahun_masuk : '') }}" required>
                                 </div>
                             </div>
 
@@ -74,8 +93,7 @@
                                     Tahun Selesai <span class="required">*</span>
                                 </label>
                                 <div class="col-lg-10">
-                                    <input id="tahun_keluar" name="tahun_keluar" class="form-control"
-                                        type="text" required>
+                                    <input id="tahun_keluar" type="text" name="tahun_keluar" class="form-control" value="{{ old('tahun_keluar', isset($pendidikan) ? $pendidikan->tahun_keluar : '') }}" required>
                                 </div>
                             </div>
 

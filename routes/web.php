@@ -4,9 +4,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
-use App\Http\Controllers\PendidikanController;
+use App\Http\Controllers\Backend\PendidikanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -109,8 +110,5 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
 
 //acara 15
-Route::group(['namespace'=>'Backend'], function()
-{
-    Route::resource('dashboard', 'DashboardController');
-    Route::resource('pendidikan', 'PendidikanController');
-});
+Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
+Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);

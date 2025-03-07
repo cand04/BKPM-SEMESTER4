@@ -43,6 +43,44 @@
                             </button>
                         </a>
                     </div>
+
+                    <!-- Tampilkan semua data pendidikan -->
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Tingkatan</th>
+                                <th>Tahun Masuk</th>
+                                <th>Tahun Keluar</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($pendidikan as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->tingkatan }}</td>
+                                    <td>{{ $item->tahun_masuk }}</td>
+                                    <td>{{ $item->tahun_keluar }}</td>
+                                    <td>
+                                        <a href="{{ route('pendidikan.edit', $item->id) }}" class="btn btn-warning">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+
+                                        <form action="{{ route('pendidikan.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                <i class="fa fa-trash-o"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </section>
             </div>
         </div>

@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Pendidikan; // Pastikan model berada di App\Models
+use App\Models\Pendidikan;
 
 class PendidikanController extends Controller
 {
     public function index()
-    {
-        // Mengambil semua data pendidikan
-        $pendidikan = Pendidikan::all();
-        return view('backend.pendidikan.index', compact('pendidikan'));
-    }
+{
+    $pendidikan = Pendidikan::all();
+
+    return view('backend.pendidikan.index', compact('pendidikan'));
+}
 
     public function create()
     {
@@ -22,7 +22,6 @@ class PendidikanController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
             'tingkatan' => 'required|string',
@@ -30,24 +29,21 @@ class PendidikanController extends Controller
             'tahun_keluar' => 'nullable|integer',
         ]);
 
-        // Menyimpan data ke database
         Pendidikan::create($request->all());
 
-        // Redirect kembali ke halaman index dengan pesan sukses
         return redirect()->route('pendidikan.index')
             ->with('success', 'Data Pendidikan berhasil ditambahkan.');
     }
 
     public function edit($id)
-    {
-        // Mengambil data pendidikan berdasarkan ID
-        $pendidikan = Pendidikan::findOrFail($id);
-        return view('backend.pendidikan.edit', compact('pendidikan'));
-    }
+{
+    $pendidikan = Pendidikan::findOrFail($id);
+
+    return view('backend.pendidikan.edit', compact('pendidikan'));
+}
 
     public function update(Request $request, $id)
     {
-        // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
             'tingkatan' => 'required|string',
@@ -55,7 +51,6 @@ class PendidikanController extends Controller
             'tahun_keluar' => 'nullable|integer',
         ]);
 
-        // Mengupdate data
         $pendidikan = Pendidikan::findOrFail($id);
         $pendidikan->update($request->all());
 
@@ -63,11 +58,9 @@ class PendidikanController extends Controller
             ->with('success', 'Data Pendidikan berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(Pendidikan $pendidikan)
     {
-        // Menghapus data berdasarkan ID
-        Pendidikan::findOrFail($id)->delete();
-
+        $pendidikan->delete();
         return redirect()->route('pendidikan.index')
             ->with('success', 'Data Pendidikan berhasil dihapus.');
     }
