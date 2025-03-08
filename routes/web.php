@@ -9,7 +9,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
 use App\Http\Controllers\Backend\PendidikanController;
 use App\Http\Controllers\PegawaiController;
-
+use App\Http\Controllers\CobaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,7 +115,7 @@ use App\Http\Controllers\PegawaiController;
 // Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
 // Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
 
-//acara 17
+//acara 17 & 18
 Route::get('/session/create', [SessionController::class, 'create']);
 Route::get('/session/show', [SessionController::class, 'show']);
 Route::get('/session/delete', [SessionController::class,'delete']);
@@ -123,3 +123,8 @@ Route::get('/session/delete', [SessionController::class,'delete']);
 Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
 Route::get('/formulir', [PegawaiController::class, 'formulir']);
 Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+
+
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+
