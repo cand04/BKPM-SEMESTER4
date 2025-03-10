@@ -4,12 +4,14 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
 use App\Http\Controllers\Backend\PendidikanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,3 +130,7 @@ Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
 Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
 Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 
+//acara 19
+Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
+Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
