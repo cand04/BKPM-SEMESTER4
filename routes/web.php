@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\ApiPendidikanController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
@@ -117,26 +119,38 @@ use App\Http\Controllers\UploadController;
 // Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
 // Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
 
-//acara 17 & 18
-Route::get('/session/create', [SessionController::class, 'create']);
-Route::get('/session/show', [SessionController::class, 'show']);
-Route::get('/session/delete', [SessionController::class,'delete']);
+// //acara 17 & 18
+// Route::get('/session/create', [SessionController::class, 'create']);
+// Route::get('/session/show', [SessionController::class, 'show']);
+// Route::get('/session/delete', [SessionController::class,'delete']);
 
-Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
-Route::get('/formulir', [PegawaiController::class, 'formulir']);
-Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+// Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
+// Route::get('/formulir', [PegawaiController::class, 'formulir']);
+// Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
 
 
-Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
-Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+// Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+// Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 
-//acara 19
-Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
-Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
-Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
+// //acara 19
+// Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+// Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
+// Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
 
-//acara 20
-Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone');
-Route::post('/dropzone/store', [UploadController::class, 'store'])->name('dropzone.store');
-Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf.upload');
-Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');
+// //acara 20
+// Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone');
+// Route::post('/dropzone/store', [UploadController::class, 'store'])->name('dropzone.store');
+// Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf.upload');
+// Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');
+
+//acara 21
+// Route::middleware('auth:api')->get('/user', function(Request $request) {
+//     return $request->user();
+// });
+// Route::group(['namespace' => 'Backend'], function () {
+//     Route::get('/api_pendidikan', [ApiPendidikanController::class, 'getAll']);
+//     Route::get('/api_pendidikan{id}', [ApiPendidikanController::class, 'getPen']);
+//     Route::post('/api_pendidikan', [ApiPendidikanController::class, 'createPen']);
+//     Route::put('/api_pendidikan{id}', [ApiPendidikanController::class, 'updatePen']);
+//     Route::delete('/api_pendidikan/{id}', [ApiPendidikanController::class, 'delete'])
+// })
