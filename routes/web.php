@@ -92,58 +92,63 @@ use App\Http\Controllers\UploadController;
 // });
 // Route::get('/home', [ManagementUserController::class, 'index']);
 
-// //acara7
-// route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
-// {
-//     route::resource('home', 'HomeController');
-// });
+//acara7
+route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
+{
+    route::resource('homem', 'HomeController');
+});
 
-// //Acara 8
-// Route::get('/dashboard', [DashboardController::class, 'index']);
+//Acara 8
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-// Auth::routes();
+Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// //acara 11
-// Auth::routes();
+//acara 11
+Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// //acara 13 & 14
-// Route::resource('dashboard', DashboardController::class);
-// Route::resource('pendidikan', PendidikanController::class);
-// Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+//acara 13 & 14
+Route::resource('dashboard', DashboardController::class);
+Route::resource('pendidikan', PendidikanController::class);
+Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
 
-// //acara 15 & 16
-// Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
-// Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
+//acara 15 & 16
+Route::resource('dashboard', App\Http\Controllers\Backend\DashboardController::class);
+Route::resource('pendidikan', App\Http\Controllers\Backend\PendidikanController::class);
 
-// //acara 17 & 18
-// Route::get('/session/create', [SessionController::class, 'create']);
-// Route::get('/session/show', [SessionController::class, 'show']);
-// Route::get('/session/delete', [SessionController::class,'delete']);
+//acara 17 & 18
+Route::get('/session/create', [SessionController::class, 'create']);
+Route::get('/session/show', [SessionController::class, 'show']);
+Route::get('/session/delete', [SessionController::class,'delete']);
 
-// Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
-// Route::get('/formulir', [PegawaiController::class, 'formulir']);
-// Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
+Route::get('/formulir', [PegawaiController::class, 'formulir']);
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
 
 
-// Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
-// Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 
-// //acara 19
-// Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
-// Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
-// Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
+//acara 19
+Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
+Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
 
-// //acara 20
-// Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone');
-// Route::post('/dropzone/store', [UploadController::class, 'store'])->name('dropzone.store');
-// Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf.upload');
-// Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');
+//acara 20
+// Route untuk halaman upload dengan Dropzone
+Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone');
 
-//acara 21
+// Route untuk meng-handle upload gambar dengan Dropzone
+Route::post('/dropzone/store', [UploadController::class, 'dropzone_store'])->name('dropzone.store');
+
+// Route untuk upload file PDF
+Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');
+
+
+// // acara 21
 // Route::middleware('auth:api')->get('/user', function(Request $request) {
 //     return $request->user();
 // });
