@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <h1>Upload File</h1>
+    <h1>Upload File Dengan Laravel</h1>
 
     @if(session('success'))
         <div style="color: green;">
@@ -21,19 +21,7 @@
         </div>
     @endif
 
-    <form action="{{ route('upload.proses') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <label for="file">Pilih File:</label>
-        <input type="file" name="file" id="file" required><br><br>
-
-        <label for="keterangan">Keterangan:</label>
-        <input type="text" name="keterangan" id="keterangan" required><br><br>
-
-        <button type="submit">Upload</button>
-    </form>
-
-    <h1>Resize and Upload Image</h1>
-
+    <!-- Form untuk resize dan upload image -->
     <form action="{{ route('upload.resize') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="file">Pilih File Gambar:</label>
@@ -42,7 +30,7 @@
         <label for="keterangan">Keterangan:</label>
         <input type="text" name="keterangan" id="keterangan" required><br><br>
 
-        <button type="submit">Resize dan Upload</button>
+        <button type="submit">Upload</button>
     </form>
 
 </body>

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PengalamanKerja; // Pastikan model PengalamanKerja diimport
+use Illuminate\Support\Facades\DB;
+use App\Models\PengalamanKerja;
 
 class PengalamanKerjaController extends Controller
 {
@@ -72,12 +73,11 @@ class PengalamanKerjaController extends Controller
     }
 
     public function destroy($id)
-    {
-        // Hapus data pengalaman kerja menggunakan Eloquent ORM
-        $pengalaman_kerja = PengalamanKerja::find($id);
-        $pengalaman_kerja->delete();
+{
+    // Hapus data pengalaman kerja menggunakan Query Builder
+    DB::table('pengalaman_kerja')->where('id', $id)->delete();
 
-        return redirect()->route('pengalaman_kerja.index')
-            ->with('success', 'Data Pengalaman Kerja berhasil dihapus');
-    }
+    return redirect()->route('pengalaman_kerja.index')
+        ->with('success', 'Data Pengalaman Kerja berhasil dihapus');
+}
 }

@@ -92,25 +92,26 @@ use App\Http\Controllers\UploadController;
 // });
 // Route::get('/home', [ManagementUserController::class, 'index']);
 
-//acara7
+//acara7 Bootstrap 
 route::group(['namespace' => 'App\Http\Controllers\frontend'], function()
 {
     route::resource('homem', 'HomeController');
 });
 
-//Acara 8
+//Acara 8 bootstrap niceadmin
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//acara 11
+//acara 11  Membuat Auth Login dan Register Username Pada Laravel
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//acara 13 & 14
+//acara 13 & 14 crud
 Route::resource('dashboard', DashboardController::class);
 Route::resource('pendidikan', PendidikanController::class);
 Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
@@ -143,6 +144,8 @@ Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone')
 
 // Route untuk meng-handle upload gambar dengan Dropzone
 Route::post('/dropzone/store', [UploadController::class, 'dropzone_store'])->name('dropzone.store');
+
+Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf.upload');
 
 // Route untuk upload file PDF
 Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');

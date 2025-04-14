@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;  // Pastikan mengimpor Request dengan benar
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -32,24 +33,34 @@ class LoginController extends Controller
      *
      * @return void
      */
-
-     public function username()
-{
-    // Cek apakah input adalah email atau username
-    $field = filter_var(request()->input('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-    
-    // Merubah input sesuai dengan field yang ditentukan
-    request()->merge([$field => request()->input('username')]);
-                                                                                                                                                            
-    // Tidak perlu mengembalikan apa pun di sini
-    // Laravel secara otomatis akan menangani field yang dipilih
-}
-
-     
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    public function login(Request $request)
+    {
+        // Validasi input login
+        $this->validate($request, [
+            'username' => 'required|string', 
+            'password' => 'required|string|min:6',
+        ]);
+
+        // Tentukan tipe login (email atau username)
+        $loginType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $login = [
+            $loginType => $request->username,
+            'password' => $request->password
+        ];
+
+        // Coba login
+        if (auth()->attempt($login)) {
+            return redirect()->route('home');
+        }
+
+        // Jika login gagal, kembali ke halaman login dengan pesan error
+        return redirect()->route('login')->with(['error' => 'Username/Password salah!']);
     }
 }

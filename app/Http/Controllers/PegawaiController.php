@@ -15,23 +15,24 @@ class PegawaiController extends Controller
     }
 
     public function proses(Request $request){
-        {
-         $messages = [
-            'required' => 'Input :atribute wajib di isi',
-            'min' => 'Input :atribute harus di isi minimal :min karakter!',
-            'max' => 'Input :atribute harus di isi maksimak :max karakter!',
-         ];
+        // Custom messages untuk validasi
+        $messages = [
+            'required' => ':attribute wajib diisi.',
+            'min' => ':attribute harus diisi minimal :min karakter!',
+            'max' => ':attribute harus diisi maksimal :max karakter!',
+            'alpha' => ':attribute hanya boleh berisi huruf.',
+        ];
 
-         $this->validate($request,[
+        // Menentukan pesan validasi untuk kolom input
+        $this->validate($request, [
             'nama' => 'required|min:5|max:20',
             'alamat' => 'required|alpha'
-         ], $messages);
+        ], $messages);
 
-         $nama = $request->input('nama');
-         $alamat = $request->input('alamat');
+        // Mengambil nilai input yang valid
+        $nama = $request->input('nama');
+        $alamat = $request->input('alamat');
 
-         return ["Nama" => $nama, "Alamat" => $alamat];
-        }
+        return ["Nama" => $nama, "Alamat" => $alamat];
     }
-    
 }
